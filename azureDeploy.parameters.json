@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceIndex": {
+            "value": "05",
+            "metadata": {
+                "description": "resourceIndex supports a developer technique of rapid iteration while developing a template."
+            }
+        },
+        "appName": {
+            "value": "YourAppName"
+        },
+        "repoURL": {
+            "value": "https://github.com/YourName/AzureFunctionForSplunk.git"
+        },
+        "branch": {
+            "value": "master"
+        },
+        "eventHubConnectionString": {
+            "value": "Endpoint=sb://YourServiceBusNamespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=gobbledegook"
+        },
+        "splunkToken": {
+            "value": "4BC788E0-YOUR-GUID-HERE-733EBC656112"
+        },
+        "splunkAddress": {
+            "value": "https://YourSplunkCloudorSplunkEnterpriseAddress.cloud.splunk.com:8088"
+        }
+    }
+}
