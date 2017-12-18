@@ -17,6 +17,12 @@
         "eventHubConnectionString": {
             "type": "string"
         },
+        "inputHubNameActivityLogs": {
+            "type": "string"
+        },
+        "inputHubNameDiagnosticsLogs": {
+            "type": "string"
+        },
         "splunkToken": {
             "type": "string"
         },
@@ -92,6 +98,14 @@
                         {
                             "name": "hubConnection",
                             "value": "[parameters('eventHubConnectionString')]"                            
+                        },
+                        {
+                            "name": "input-hub-name-activity-logs",
+                            "value": "[parameters('inputHubNameActivityLogs')]"
+                        },
+                        {
+                            "name": "input-hub-name-diagnostics-logs",
+                            "value": "[parameters('inputHubNameDiagnosticsLogs')]"
                         },
                         {
                             "name": "splunkToken",
