@@ -25,6 +25,9 @@
         },
         "splunkAddress": {
             "value": "https://YourSplunkCloudorSplunkEnterpriseAddress.cloud.splunk.com:8088"
+        },
+        "outputBinding": {
+            "value": "hec"
         }
     }
 }
