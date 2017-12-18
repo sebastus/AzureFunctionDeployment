@@ -25,7 +25,7 @@
         }
     },
     "variables": {
-        "functionAppName": "[concat(parameters('appName'), parameters('resourceIndex'))]",
+        "functionAppName": "[parameters('appName')]",
         "hostingPlanName": "[variables('functionAppName')]",
         "storageAccountName": "[concat('golivefunc', uniquestring(resourceGroup().id))]",
         "storageAccountid": "[concat(resourceGroup().id,'/providers/','Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]"
