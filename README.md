@@ -2,6 +2,9 @@
 
 The SplunkVS branch contains a working version of the deployment template, tailored for a real version of a function that transmits Azure Monitor Logs to Splunk's HEC port. The Deploy to Azure button below works, as does the function it deploys.
 
+
+[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsebastus%2FAzureFunctionDeployment%2FSplunkVS%2FazureDeploy.json)  
+
 ## Overview
 
 The steps to fully implement the Azure Function for Splunk are:  
@@ -33,20 +36,23 @@ A new feature of Azure Monitor allows you to route all diagnostic log messages t
 * splunkToken                 - HEC token, issued by Splunk Cloud, Splunk Enterprise UI.
 * outputBinding               - "hec". There may be other output bindings in future.
 
-[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsebastus%2FAzureFunctionDeployment%2FSplunkVS%2FazureDeploy.json)
 
 ## How to get the Event Hub Connection String via Azure Portal
 
-![GetEventHubConnectionString](content/readmePic1.PNG)
+![GetEventHubConnectionString](content/readmePic1.PNG)  
 Navigate to your event hub namespace by selecting it from the list of resources in the resource group.  
 
 ### Select the security policy that your function should use
 
-![SelectSecurityPolicy](content/readmePic2.PNG)
+![SelectSecurityPolicy](content/readmePic2.PNG)  
 The RootManageSharedAccessKey has full control over every hub in the namespace. You only need 'read' access.  
 
 ### Copy the connection string
 
-![CopyTheConnectionString](content/readmePic3.PNG)
+![CopyTheConnectionString](content/readmePic3.PNG)  
 Copy the connection string, paste it into the settings dialog on deployment.
 
+## Deployment Settings form
+
+![DeploymentSettingsForm](content/readmePic4.PNG)  
+Fill in the settings values, check the box to accept T&C's, and Purchase. Here's the [page](https://azure.microsoft.com/en-us/pricing/details/functions/) describing the pricing model for Azure Functions.
