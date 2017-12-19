@@ -24,19 +24,19 @@ A new feature of Azure Monitor allows you to route all diagnostic log messages t
 ## Settings
 
 * AppName                     - this is the name of the function app. In the Azure Portal, this is the name that will appear in the list of resources.
-* repoURL                     - this is the URL of the repo that contains the function app source.
+* repoURL                     - this is the URL of the repo that contains the function app source.  
    Example: ```https://github.com/sebastus/AzureFunctionForSplunkVS```
-* repoBranch                  - this is the name of the branch containing the code you want to deploy.
+* repoBranch                  - this is the name of the branch containing the code you want to deploy.  
    Example: ```master```
-* eventHubConnectionString    - this is the SAS-enabled connection string to your event hub namespace policy. 
-   Here's an example: ```Endpoint=sb://yournamespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yourkey```
+* eventHubConnectionString    - this is the SAS-enabled connection string to your event hub namespace policy.  
+   Example: ```Endpoint=sb://yournamespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yourkey```
    See screenshots of how to get this value below.
-* inputHubNameActivityLogs    - name of the hub (within the hub namespace) that receives Activity Log events
+* inputHubNameActivityLogs    - name of the hub (within the hub namespace) that receives Activity Log events  
    Example: ```insights-operational-logs```
    (at present, this is the correct value. It becomes configurable in future.)
-* inputHubNameDiagnosticsLogs - name of the hub that receives your diagnostic log events. You decide this name and configure Azure accordingly.
+* inputHubNameDiagnosticsLogs - name of the hub that receives your diagnostic log events. You decide this name and configure Azure accordingly.  
    Example: ```insights-logs-diagnostics```
-* splunkAddress               - HEC "send to" address.
+* splunkAddress               - HEC "send to" address.  
    Here's an example: ```https://YourSplunkCloudorSplunkEnterpriseAddress.cloud.splunk.com:8088/services/collector/event```
 * splunkToken                 - HEC token, issued by Splunk Cloud, Splunk Enterprise UI.
 * outputBinding               - "hec". There may be other output bindings in future.
