@@ -6,19 +6,16 @@
             "value": "YourAppName"
         },
         "repoURL": {
-            "value": "https://github.com/YourName/AzureFunctionForSplunk.git"
+            "value": "https://github.com/YourName/yourRepo.git"
         },
         "branch": {
-            "value": "master"
+            "value": "yourBranch"
         },
-        "eventHubConnectionString": {
-            "value": "Endpoint=sb://YourServiceBusNamespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=gobbledegook"
+        "appSetting1": {
+            "value": "someSettingValue"
         },
-        "splunkToken": {
-            "value": "4BC788E0-YOUR-GUID-HERE-733EBC656112"
-        },
-        "splunkAddress": {
-            "value": "https://YourSplunkCloudorSplunkEnterpriseAddress.cloud.splunk.com:8088"
+        "appSetting2": {
+            "value": "someSettingValueToo"
         }
     }
 }

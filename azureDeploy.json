@@ -17,17 +17,17 @@
         "eventHubConnectionString": {
             "type": "string"
         },
-        "splunkToken": {
+        "appSetting1": {
             "type": "string"
         },
-        "splunkAddress": {
+        "appSetting2": {
             "type": "string"
         }
     },
     "variables": {
         "functionAppName": "[parameters('appName')]",
         "hostingPlanName": "[variables('functionAppName')]",
-        "storageAccountName": "[concat('golivefunc', uniquestring(resourceGroup().id))]",
+        "storageAccountName": "[concat('func', uniquestring(resourceGroup().id))]",
         "storageAccountid": "[concat(resourceGroup().id,'/providers/','Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]"
     },
     "resources": [
@@ -90,16 +90,12 @@
                             "value": "6.5.0"
                         },
                         {
-                            "name": "hubConnection",
-                            "value": "[parameters('eventHubConnectionString')]"                            
+                            "name": "appSetting1",
+                            "value": "[parameters('appSetting1')]"
                         },
                         {
-                            "name": "splunkToken",
-                            "value": "[parameters('splunkToken')]"
-                        },
-                        {
-                            "name": "splunkAddress",
-                            "value": "[parameters('splunkAddress')]"
+                            "name": "appSetting2",
+                            "value": "[parameters('appSetting2')]"
                         }
                     ]
                 }

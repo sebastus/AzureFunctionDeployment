@@ -1,6 +1,6 @@
 # Deploy an Azure Function using an ARM template
 
-The master branch contains a generic version of the deployment template, tailored for a fictional version of a function that transmits Azure Monitor Logs to Splunk's HEC port. The Deploy to Azure button below works, but the deployed function does not.
+The master branch contains a generic version of the deployment template, tailored for a fictional version of a function . The Deploy to Azure button below works, but there's no function to be deployed with current settings.
 
 See other branches for more specific, working examples.  
 
