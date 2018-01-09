@@ -5,10 +5,19 @@
         "appName": {
             "value": "YourAppName"
         },
-        "repoURL": {
+        "appServicePlanTier": {
+            "value": "Standard"
+        },
+        "appServicePlanName": {
+            "value": "S2"
+        },
+        "appServicePlanCapacity": {
+            "value": 2
+        },
+        "githubRepoURL": {
             "value": "https://github.com/YourName/AzureFunctionForSplunk.git"
         },
-        "branch": {
+        "githubRepoBranch": {
             "value": "master"
         },
         "eventHubConnectionString": {
