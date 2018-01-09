@@ -14,14 +14,27 @@
         "githubRepoBranch": {
             "type": "string"
         },
-        "eventHubConnectionString": {
+        "blobContainerName": {
+            "type": "string",
+            "defaultValue": "insights-logs-networksecuritygroupflowevent"
+        },
+        "nsgSourceDataAccount": {
+            "type": "string",
+            "defaultValue": "nsgSourceDataConnection1"
+        },
+        "nsgSourceDataConnection1": {
             "type": "string"
         },
-        "appSetting1": {
+        "outputBinding": {
+            "type": "string",
+            "defaultValue": "arcsight"
+        },
+        "arcsightAddress": {
             "type": "string"
         },
-        "appSetting2": {
-            "type": "string"
+        "arcsightPort": {
+            "type": "string",
+            "defaultValue": "1514"
         }
     },
     "variables": {
@@ -90,12 +103,28 @@
                             "value": "6.5.0"
                         },
                         {
-                            "name": "appSetting1",
-                            "value": "[parameters('appSetting1')]"
+                            "name": "blobContainerName",
+                            "value": "[parameters('blobContainerName')]"
                         },
                         {
-                            "name": "appSetting2",
-                            "value": "[parameters('appSetting2')]"
+                            "name": "nsgSourceDataAccount",
+                            "value": "[parameters('nsgSourceDataAccount')]"
+                        },
+                        {
+                            "name": "nsgSourceDataConnection1",
+                            "value": "[parameters('nsgSourceDataConnection1')]"
+                        },
+                        {
+                            "name": "outputBinding",
+                            "value": "[parameters('outputBinding')]"
+                        },
+                        {
+                            "name": "arcsightAddress",
+                            "value": "[parameters('arcsightAddress')]"
+                        },
+                        {
+                            "name": "arcsightPort",
+                            "value": "[parameters('arcsightPort')]"
                         }
                     ]
                 }

@@ -11,11 +11,26 @@
         "branch": {
             "value": "yourBranch"
         },
-        "appSetting1": {
-            "value": "someSettingValue"
+        "blobContainerName": {
+            "value": "insights-logs-networksecuritygroupflowevent"
         },
-        "appSetting2": {
-            "value": "someSettingValueToo"
+        "nsgSourceDataAccount": {
+            "value": "nsgSourceDataConnection1"
+        },
+        "nsgSourceDataConnection1": {
+            "value": "blob-account-connection-string"
+        },
+        "outputBinding": {
+            "value": "arcsight"
+        },
+        "arcsightAddress": {
+            "value": "192.168.1.1",
+            "metadata": {
+                "description": "IP address of arcsight server"
+            }
+        },
+        "arcsightPort": {
+            "value": "1514"
         }
     }
 }
