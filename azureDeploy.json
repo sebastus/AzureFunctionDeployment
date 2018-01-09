@@ -8,6 +8,18 @@
                 "description": "The name of the function app that you wish to create."
             }
         },
+        "appServicePlanTier": {
+            "type": "string",
+            "defaultValue": "Free"
+        },
+        "appServicePlanName": {
+            "type": "string",
+            "defaultValue": "F1"
+        },
+        "appServicePlanCapacity": {
+            "type": "int",
+            "defaultValue": 2
+        },
         "githubRepoURL": {
             "type": "string"
         },
@@ -55,13 +67,13 @@
         },
         {
             "type": "Microsoft.Web/serverfarms",
-            "apiVersion": "2015-04-01",
+            "apiVersion": "2016-09-01",
             "name": "[variables('hostingPlanName')]",
             "location": "[resourceGroup().location]",
-            "properties": {
-                "name": "[variables('hostingPlanName')]",
-                "computeMode": "Dynamic",
-                "sku": "Dynamic"
+            "sku": {
+                "tier": "[parameters('appServicePlanTier')]",
+                "name": "[parameters('appServicePlanName')]",
+                "capacity": "[parameters('appServicePlanCapacity')]"
             }
         },
         {
