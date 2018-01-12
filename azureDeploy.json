@@ -35,6 +35,9 @@
         "inputHubNameDiagnosticsLogs": {
             "type": "string"
         },
+        "inputHubNameMetrics": {
+            "type": "string"
+        },
         "splunkToken": {
             "type": "string"
         },
@@ -121,6 +124,10 @@
                         {
                             "name": "input-hub-name-diagnostics-logs",
                             "value": "[parameters('inputHubNameDiagnosticsLogs')]"
+                        },
+                        {
+                            "name": "input-hub-name-metrics",
+                            "value": "[parameters('inputHubNameMetrics')]"
                         },
                         {
                             "name": "splunkToken",
