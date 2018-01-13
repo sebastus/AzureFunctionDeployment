@@ -30,13 +30,16 @@
             "type": "string"
         },
         "inputHubNameActivityLogs": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "insights-operational-logs"
         },
         "inputHubNameDiagnosticsLogs": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "insights-logs-diagnostics"
         },
         "inputHubNameMetrics": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "insights-metrics-pt1m"
         },
         "splunkToken": {
             "type": "string"
@@ -44,8 +47,13 @@
         "splunkAddress": {
             "type": "string"
         },
+        "splunkCertThumbprint": {
+            "type": "string",
+            "defaultValue": ""
+        },
         "outputBinding": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "hec"
         }
     },
     "variables": {
