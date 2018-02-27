@@ -37,6 +37,9 @@
         "nsgSourceDataConnection1": {
             "type": "string"
         },
+        "cefLogAccount": {
+            "type": "string"
+        },
         "outputBinding": {
             "type": "string",
             "defaultValue": "arcsight"
@@ -137,6 +140,18 @@
                         {
                             "name": "arcsightPort",
                             "value": "[parameters('arcsightPort')]"
+                        },
+                        {
+                            "name": "cefLogAccount",
+                            "value": "[parameters('cefLogAccount')]"
+                        },
+                        {
+                            "name": "logIncomingJSON",
+                            "value": "false"
+                        },
+                        {
+                            "name": "logOutgoingCEF",
+                            "value": "false"
                         }
                     ]
                 }
