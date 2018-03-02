@@ -27,20 +27,14 @@
         "githubRepoBranch": {
             "type": "string",
             "defaultValue": "master"
-        },
-        "blobContainerName": {
+        },        
+        "nsgSourceDataConnection": {
             "type": "string",
-            "defaultValue": "insights-logs-networksecuritygroupflowevent"
-        },
-        "nsgSourceDataAccount": {
-            "type": "string",
-            "defaultValue": "nsgSourceDataConnection1"
-        },
-        "nsgSourceDataConnection1": {
-            "type": "string"
+            "defaultValue": "[mandatory storage account connection string for nsg flow log data]"
         },
         "cefLogAccount": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "[Optional storage account connection string for log tracing]"
         },
         "outputBinding": {
             "type": "string",
@@ -121,15 +115,15 @@
                         },
                         {
                             "name": "blobContainerName",
-                            "value": "[parameters('blobContainerName')]"
+                            "value": "insights-logs-networksecuritygroupflowevent"
                         },
                         {
                             "name": "nsgSourceDataAccount",
-                            "value": "[parameters('nsgSourceDataAccount')]"
+                            "value": "nsgSourceDataConnection"
                         },
                         {
-                            "name": "nsgSourceDataConnection1",
-                            "value": "[parameters('nsgSourceDataConnection1')]"
+                            "name": "nsgSourceDataConnection",
+                            "value": "[parameters('nsgSourceDataConnection')]"
                         },
                         {
                             "name": "outputBinding",

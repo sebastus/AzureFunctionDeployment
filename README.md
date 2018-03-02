@@ -16,8 +16,10 @@ The steps to fully implement the Azure Network Watcher NSG Flow Logs Connector a
 
 ## Settings
 
-* AppName                     - this is the name of the function app. In the Azure Portal, this is the name that will appear in the list of resources.
-* appServicePlanTier          - "Free", "Shared", "Basic", "Standard", "Premium", "PremiumV2"
+* AppName                     - this is the name of the function app. In the Azure Portal, this is the name that will appear in the list of resources.  
+   Example: ```MyNSGApp```  
+* appServicePlanTier          - "Free", "Shared", "Basic", "Standard", "Premium", "PremiumV2"  
+   Example: ```Standard```
 * appServicePlanName          - depends on tier, for full details see "Choose your pricing tier" in the portal on an App service plan "Scale up" applet.  
    Example: For standard tier, "S1", "S2", "S3" are options for plan name
 * appServicePlanCapacity      - how many instances do you want to set for the upper limit?  
@@ -26,11 +28,7 @@ The steps to fully implement the Azure Network Watcher NSG Flow Logs Connector a
    Example: ```https://github.com/microsoft/AzureNetworkWatcherNSGFlowLogsConnector```
 * githubRepoBranch                  - this is the name of the branch containing the code you want to deploy.  
    Example: ```master```
-* blobContainerName           - the name of the blob container from which NSG blobs are to be acquired, normally doesn't change
-   Example: ```insights-logs-networksecuritygroupflowevent```
-* nsgSourceDataAccount              - indirection pointer to storage account reference  
-   Example: ```nsgSourceDataConnection1```
-* nsgSourceDataConnection1    - a storage account connection string  
+* nsgSourceDataConnection     - a storage account connection string  
    Example: ```DefaultEndpointsProtocol=https;AccountName=yyy;AccountKey=xxx;EndpointSuffix=core.windows.net```
 * cefLogAccount               - a storage account connection string - account into which trace logs of incoming json and outgoing cef are dropped  
    Example: ```DefaultEndpointsProtocol=https;AccountName=yyy;AccountKey=xxx;EndpointSuffix=core.windows.net```
