@@ -21,10 +21,12 @@
             "defaultValue": 2
         },
         "githubRepoURL": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "https://github.com/Microsoft/AzureNetworkWatcherNSGFlowLogsConnector.git"
         },
         "githubRepoBranch": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "master"
         },
         "blobContainerName": {
             "type": "string",

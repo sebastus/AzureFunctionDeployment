@@ -22,7 +22,7 @@ The steps to fully implement the Azure Network Watcher NSG Flow Logs Connector a
    Example: For standard tier, "S1", "S2", "S3" are options for plan name
 * appServicePlanCapacity      - how many instances do you want to set for the upper limit?  
    Example: For standard tier, S2, set a value from 1 to 10
-* githubRepoURL                     - this is the URL of the repo that contains the function app source.  
+* githubRepoURL                     - this is the URL of the repo that contains the function app source. You would put your fork's address here.  
    Example: ```https://github.com/microsoft/AzureNetworkWatcherNSGFlowLogsConnector```
 * githubRepoBranch                  - this is the name of the branch containing the code you want to deploy.  
    Example: ```master```
