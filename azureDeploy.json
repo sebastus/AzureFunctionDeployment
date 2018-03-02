@@ -34,7 +34,7 @@
         },
         "cefLogAccount": {
             "type": "string",
-            "defaultValue": "[Optional storage account connection string for log tracing]"
+            "defaultValue": "Optional storage account connection string for log tracing"
         },
         "outputBinding": {
             "type": "string",

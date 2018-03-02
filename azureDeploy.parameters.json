@@ -11,13 +11,7 @@
         "branch": {
             "value": "yourBranch"
         },
-        "blobContainerName": {
-            "value": "insights-logs-networksecuritygroupflowevent"
-        },
-        "nsgSourceDataAccount": {
-            "value": "nsgSourceDataConnection1"
-        },
-        "nsgSourceDataConnection1": {
+        "nsgSourceDataConnection": {
             "value": "blob-account-connection-string"
         },
         "outputBinding": {
