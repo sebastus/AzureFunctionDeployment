@@ -1,6 +1,6 @@
 # Deploy an Azure Function using an ARM template
 
-The SplunkVS branch contains a working version of the deployment template, tailored for a real version of a function that transmits Azure Monitor Logs to Splunk's HEC port.  
+The SplunkVS branch contains a working version of the deployment template, tailored for a real version of a function that transmits Azure Monitor Logs to Splunk's HEC port. That function is [Azure Function For Splunk](https://github.com/Microsoft/AzureFunctionforSplunkVS)  
 
 
 [![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsebastus%2FAzureFunctionDeployment%2FSplunkVS%2FazureDeploy.json)  
@@ -25,17 +25,24 @@ A new feature of Azure Monitor allows you to route all diagnostic log messages t
 
 * AppName                     - this is the name of the function app. In the Azure Portal, this is the name that will appear in the list of resources.
 * repoURL                     - this is the URL of the repo that contains the function app source.  
-   Example: ```https://github.com/sebastus/AzureFunctionForSplunkVS```
+   Example: ```https://github.com/microsoft/AzureFunctionForSplunkVS```
 * repoBranch                  - this is the name of the branch containing the code you want to deploy.  
    Example: ```master```
-* eventHubConnectionString    - this is the SAS-enabled connection string to your event hub namespace policy.  
+* eventHubConnectionString    - this is the SAS Policy connection string to your event hub namespace policy.  
    Example: ```Endpoint=sb://yournamespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yourkey```
-   See screenshots of how to get this value below.
+   See screenshots showing how to get this value below.
 * inputHubNameActivityLogs    - name of the hub (within the hub namespace) that receives Activity Log events  
    Example: ```insights-operational-logs```
-   (at present, this is the correct value. It becomes configurable in future.)
+   (at present, this is the only correct value. It becomes configurable in future.)
 * inputHubNameDiagnosticsLogs - name of the hub that receives your diagnostic log events. You decide this name and configure Azure accordingly.  
    Example: ```insights-logs-diagnostics```
+* inputHubNameMetrics - name of the hub that receives your Azure Monitor Metrics. You decide this name and configure Azure accordingly.  
+   Example: ```insights-metrics-pt1m```
+* inputHubNameWAD - name of the hub that receives telemetry from your configured Windows VMs. You decide this name and configure Azure accordingly.  
+   Example: ```insights-telemetry-wad```
+* inputHubNameLAD - name of the hub that receives telemetry from your configured Linux VMs. You decide this name and configure Azure accordingly.  
+   Example: ```insights-telemetry-lad```
+
 * splunkAddress               - HEC "send to" address.  
    Here's an example: ```https://YourSplunkCloudorSplunkEnterpriseAddress.cloud.splunk.com:8088/services/collector/event```
 * splunkToken                 - HEC token, issued by Splunk Cloud, Splunk Enterprise UI.

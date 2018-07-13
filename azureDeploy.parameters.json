@@ -29,6 +29,15 @@
         "inputHubNameDiagnosticsLogs": {
             "value": "my-hub-name-for-diagnostics-logs"
         },
+        "inputHubNameMetrics": {
+            "value": "my-hub-name-for-metrics"
+        },
+        "inputHubNameWAD": {
+            "value": "insights-telemetry-wad"
+        },
+        "inputHubNameLAD": {
+            "value": "insights-telemetry-lad"
+        },
         "splunkToken": {
             "value": "4BC788E0-YOUR-GUID-HERE-733EBC656112"
         },

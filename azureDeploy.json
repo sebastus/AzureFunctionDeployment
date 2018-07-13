@@ -41,6 +41,14 @@
             "type": "string",
             "defaultValue": "insights-metrics-pt1m"
         },
+        "inputHubNameWAD": {
+            "type": "string",
+            "defaultValue": "insights-telemetry-wad"
+        },
+        "inputHubNameLAD": {
+            "type": "string",
+            "defaultValue": "insights-telemetry-lad"
+        },
         "splunkToken": {
             "type": "string"
         },
@@ -138,6 +146,14 @@
                             "value": "[parameters('inputHubNameMetrics')]"
                         },
                         {
+                            "name": "input-hub-name-wad",
+                            "value": "[parameters('inputHubNameWAD')]"
+                        },
+                        {
+                            "name": "input-hub-name-lad",
+                            "value": "[parameters('inputHubNameLAD')]"
+                        },
+                        {
                             "name": "splunkToken",
                             "value": "[parameters('splunkToken')]"
                         },
@@ -148,6 +164,10 @@
                         {
                             "name": "outputBinding",
                             "value": "[parameters('outputBinding')]"
+                        },
+                        {
+                            "name": "splunkCertThumbprint",
+                            "value": "[parameters('splunkCertThumbprint')]"
                         }
                     ]
                 }
