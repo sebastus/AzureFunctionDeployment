@@ -10,24 +10,50 @@
         },
         "appServicePlanTier": {
             "type": "string",
-            "defaultValue": "Free"
+            "allowedValues": [
+                "Free",
+                "Shared",
+                "Basic",
+                "Standard",
+                "Premium"
+            ],
+            "defaultValue": "Standard"
         },
         "appServicePlanName": {
             "type": "string",
-            "defaultValue": "F1"
+            "defaultValue": "S1"
         },
         "appServicePlanCapacity": {
             "type": "int",
             "defaultValue": 2
         },
+        "appInsightsLocation": {
+            "type": "string",
+            "defaultValue": "North Europe",
+            "allowedValues": [
+                "North Europe",
+                "West Europe",
+                "East US",
+                "West US 2",
+                "South Central US",
+                "Southeast Asia"
+            ]
+        },
+        "appInsightsName": {
+            "type": "string",
+            "defaultValue": "appInsightsInstance"
+        },
         "githubRepoURL": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "https://github.com/microsoft/AzureFunctionForSplunkVS.git"
         },
         "githubRepoBranch": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "master"
         },
         "eventHubConnectionString": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "Endpoint=sb://YOURNAMESPACE.servicebus.windows.net/;SharedAccessKeyName=YOURPOLICYNAME;SharedAccessKey=YOURPOLICYKEY"
         },
         "inputHubNameActivityLogs": {
             "type": "string",
@@ -65,6 +91,11 @@
         }
     },
     "variables": {
+        "alwaysOnAvail1": "[equals(parameters('appServicePlanTier'),'Standard')]",
+        "alwaysOnAvail2": "[equals(parameters('appServicePlanTier'),'Basic')]",
+        "alwaysOnAvail3": "[equals(parameters('appServicePlanTier'),'Premium')]",
+        "alwaysOnAvail4": "[or(variables('alwaysOnAvail1'), variables('alwaysOnAvail2'))]",
+        "alwaysOnAvailable": "[or(variables('alwaysOnAvail3'), variables('alwaysOnAvail4'))]",
         "functionAppName": "[parameters('appName')]",
         "hostingPlanName": "[variables('functionAppName')]",
         "storageAccountName": "[concat('golivefunc', uniquestring(resourceGroup().id))]",
@@ -78,6 +109,18 @@
             "location": "[resourceGroup().location]",
             "properties": {
                 "accountType": "Standard_LRS"
+            }
+        },
+        {
+            "name": "[parameters('appInsightsName')]",
+            "type": "Microsoft.Insights/components",
+            "apiVersion": "2015-05-01",
+            "location": "[parameters('appInsightsLocation')]",
+            "kind": "web",
+            "properties": {
+                "Application_Type": "web",
+                "Flow_Type": "Bluefield",
+                "Request_Source": "rest"
             }
         },
         {
@@ -99,11 +142,13 @@
             "kind": "functionapp",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
-                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]",
+                "[resourceId('Microsoft.Insights/components', parameters('appInsightsName')]"
             ],
             "properties": {
                 "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
                 "siteConfig": {
+                    "alwaysOn": "[variables('alwaysOnAvailable')]",
                     "appSettings": [
                         {
                             "name": "AzureWebJobsDashboard",
@@ -130,8 +175,12 @@
                             "value": "6.5.0"
                         },
                         {
+                            "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+                            "value": "[reference(resourceId('Microsoft.Insights/components', parameters('appInsightsName')), '2015-05-01').InstrumentationKey]"
+                        },
+                        {
                             "name": "hubConnection",
-                            "value": "[parameters('eventHubConnectionString')]"                            
+                            "value": "[parameters('eventHubConnectionString')]"
                         },
                         {
                             "name": "input-hub-name-activity-logs",
