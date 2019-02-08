@@ -2,7 +2,7 @@
 
 The NwNSGGlowLogs branch contains a working version of the deployment template, tailored for a real version of a function that transmits Azure Network Watcher NSG Flow Logs to Arcsight, Splunk, LogStash or EventHub.  
 
-NOTE: When the Azure Network Watcher team deploys their own Event Hub egress option, that is preferred to this one.  
+NOTE: Native support for event hubs is not yet available, but would be the preferred method.  
 
 [![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsebastus%2FAzureFunctionDeployment%2FNwNSGFlowLogs%2FazureDeploy.json)
 
