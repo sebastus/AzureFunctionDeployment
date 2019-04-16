@@ -9,10 +9,12 @@
             }
         },
         "githubRepoURL": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "https://github.com/sebastus/AzureMonitorFunctionProxy.git"
         },
         "githubRepoBranch": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "master"
         },
         "splunkToken": {
             "type": "string"
