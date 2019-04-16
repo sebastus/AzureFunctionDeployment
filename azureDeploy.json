@@ -70,11 +70,11 @@
             "location": "[resourceGroup().location]",
             "kind": "functionapp",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
+                "[resourceId('Microsoft.Web/serverfarms', variables('ServicePlanName'))]",
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
             ],
             "properties": {
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('ServicePlanName'))]",
                 "siteConfig": {
                     "appSettings": [
                         {
