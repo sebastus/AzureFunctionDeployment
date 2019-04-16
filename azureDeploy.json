@@ -8,6 +8,17 @@
                 "description": "The name of the function app that you wish to create."
             }
         },
+        "appServicePlanType" : {
+            "type": "string",
+            "defaultValue": "ServicePlan",
+            "allowedValues": [
+                "ServicePlan",
+                "Consumption"
+            ],
+            "metadata": {
+                "description": "The ServicePlan option creates an App Service Plan and is billed according to that plan. The Consumption option bills according to https://azure.microsoft.com/en-gb/pricing/details/functions/."
+            }
+        },        
         "appServicePlanTier": {
             "type": "string",
             "allowedValues": [
@@ -15,7 +26,8 @@
                 "Shared",
                 "Basic",
                 "Standard",
-                "Premium"
+                "Premium",
+                "Isolated"
             ],
             "defaultValue": "Standard"
         },
@@ -29,14 +41,22 @@
         },
         "appInsightsLocation": {
             "type": "string",
-            "defaultValue": "North Europe",
+            "defaultValue": "UK South",
             "allowedValues": [
-                "North Europe",
-                "West Europe",
+                "Australia East",
+                "Canada Central",
+                "Central India",
                 "East US",
-                "West US 2",
+                "France Central",
+                "Japan East",
+                "Korea Central",
+                "North Europe",
                 "South Central US",
-                "Southeast Asia"
+                "Southeast Asia",
+                "UK South",
+                "UK West",
+                "West Europe",
+                "West US 2"
             ]
         },
         "appInsightsName": {
@@ -59,21 +79,45 @@
             "type": "string",
             "defaultValue": "insights-operational-logs"
         },
-        "inputHubNameDiagnosticsLogs": {
+        "consumerGroupNameActivityLog": {
+            "type": "string",
+            "defaultValue": "$default"
+        },
+        "inputHubNameDiagnosticLogs": {
             "type": "string",
             "defaultValue": "insights-logs-diagnostics"
+        },
+        "consumerGroupNameDiagnosticLogs": {
+            "type": "string",
+            "defaultValue": "$default"
         },
         "inputHubNameMetrics": {
             "type": "string",
             "defaultValue": "insights-metrics-pt1m"
         },
+        "consumerGroupNameMetrics": {
+            "type": "string",
+            "defaultValue": "$default"
+        },
         "inputHubNameWAD": {
             "type": "string",
             "defaultValue": "insights-telemetry-wad"
         },
+        "consumerGroupNameWAD": {
+            "type": "string",
+            "defaultValue": "$default"
+        },
         "inputHubNameLAD": {
             "type": "string",
             "defaultValue": "insights-telemetry-lad"
+        },
+        "consumerGroupNameLAD": {
+            "type": "string",
+            "defaultValue": "$default"
+        },
+        "inputHubNameFaults": {
+            "type": "string",
+            "defaultValue": "transmission-faults"
         },
         "splunkToken": {
             "type": "string"
@@ -91,14 +135,22 @@
         }
     },
     "variables": {
+        "alwaysOnAvail0": "[equals(parameters('appServicePlanType'),'ServicePlan')]",
         "alwaysOnAvail1": "[equals(parameters('appServicePlanTier'),'Standard')]",
         "alwaysOnAvail2": "[equals(parameters('appServicePlanTier'),'Basic')]",
         "alwaysOnAvail3": "[equals(parameters('appServicePlanTier'),'Premium')]",
-        "alwaysOnAvail4": "[or(variables('alwaysOnAvail1'), variables('alwaysOnAvail2'))]",
-        "alwaysOnAvailable": "[or(variables('alwaysOnAvail3'), variables('alwaysOnAvail4'))]",
+        "alwaysOnAvail4": "[equals(parameters('appServicePlanTier'),'Isolated')]",
+        "alwaysOnAvaila": "[or(variables('alwaysOnAvail1'), variables('alwaysOnAvail2'))]",
+        "alwaysOnAvailb": "[or(variables('alwaysOnAvail3'), variables('alwaysOnAvail4'))]",
+        "alwaysOnAvailc": "[or(variables('alwaysOnAvaila'), variables('alwaysOnAvailb'))]",
+
+        "alwaysOnAvailable": "[and(variables('alwaysOnAvail0'), variables('alwaysOnAvailc'))]",
+
         "functionAppName": "[parameters('appName')]",
-        "hostingPlanName": "[variables('functionAppName')]",
-        "storageAccountName": "[concat('golivefunc', uniquestring(resourceGroup().id))]",
+        "ServicePlanName": "[concat('sp-', parameters('appName'))]",
+        "ConsumptionName": "[concat('cn-', parameters('appName'))]",
+        "hostingPlanName": "[variables(concat(parameters('appServicePlanType'), 'Name'))]",
+        "storageAccountName": "[concat('func', uniquestring(resourceGroup().id))]",
         "storageAccountid": "[concat(resourceGroup().id,'/providers/','Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]"
     },
     "resources": [
@@ -124,14 +176,27 @@
             }
         },
         {
+            "condition": "[equals(parameters('appServicePlanType'), 'ServicePlan')]",
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2016-09-01",
-            "name": "[variables('hostingPlanName')]",
+            "name": "[variables('ServicePlanName')]",
             "location": "[resourceGroup().location]",
             "sku": {
                 "tier": "[parameters('appServicePlanTier')]",
                 "name": "[parameters('appServicePlanName')]",
                 "capacity": "[parameters('appServicePlanCapacity')]"
+            }
+        },        
+        {
+            "condition": "[equals(parameters('appServicePlanType'), 'Consumption')]",
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2015-04-01",
+            "name": "[variables('ConsumptionName')]",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "name": "[variables('ConsumptionName')]",
+                "computeMode": "Dynamic",
+                "sku": "Dynamic"
             }
         },
         {
@@ -183,24 +248,48 @@
                             "value": "[parameters('eventHubConnectionString')]"
                         },
                         {
-                            "name": "input-hub-name-activity-logs",
+                            "name": "input-hub-name-activity-log",
                             "value": "[parameters('inputHubNameActivityLogs')]"
                         },
                         {
-                            "name": "input-hub-name-diagnostics-logs",
-                            "value": "[parameters('inputHubNameDiagnosticsLogs')]"
+                            "name": "consumer-group-activity-log",
+                            "value": "[parameters('consumerGroupNameActivityLog')]"
+                        },
+                        {
+                            "name": "input-hub-name-diagnostic-logs",
+                            "value": "[parameters('inputHubNameDiagnosticLogs')]"
+                        },
+                        {
+                            "name": "consumer-group-diagnostic-logs",
+                            "value": "[parameters('consumerGroupNameDiagnosticLogs')]"
                         },
                         {
                             "name": "input-hub-name-metrics",
                             "value": "[parameters('inputHubNameMetrics')]"
                         },
                         {
+                            "name": "consumer-group-metrics",
+                            "value": "[parameters('consumerGroupNameMetrics')]"
+                        },
+                        {
                             "name": "input-hub-name-wad",
                             "value": "[parameters('inputHubNameWAD')]"
                         },
                         {
+                            "name": "consumer-group-wad",
+                            "value": "[parameters('consumerGroupNameWAD')]"
+                        },
+                        {
                             "name": "input-hub-name-lad",
                             "value": "[parameters('inputHubNameLAD')]"
+                        },
+                        {
+                            "name": "consumer-group-lad",
+                            "value": "[parameters('consumerGroupNameLAD')]"
+                        },
+                        {
+                            "name": "input-hub-name-faults",
+                            "value": "[parameters('inputHubNameFaults')]"
                         },
                         {
                             "name": "splunkToken",
