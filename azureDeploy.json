@@ -5,7 +5,7 @@
         "appName": {
             "type": "string",
             "metadata": {
-                "description": "The name of the function app that you wish to create."
+                "description": "The name of the function app to be created."
             }
         },
         "githubRepoURL": {
@@ -14,13 +14,10 @@
         "githubRepoBranch": {
             "type": "string"
         },
-        "eventHubConnectionString": {
+        "splunkToken": {
             "type": "string"
         },
-        "appSetting1": {
-            "type": "string"
-        },
-        "appSetting2": {
+        "splunkAddress": {
             "type": "string"
         }
     },
@@ -90,12 +87,12 @@
                             "value": "6.5.0"
                         },
                         {
-                            "name": "appSetting1",
-                            "value": "[parameters('appSetting1')]"
+                            "name": "splunkToken",
+                            "value": "[parameters('splunkToken')]"
                         },
                         {
-                            "name": "appSetting2",
-                            "value": "[parameters('appSetting2')]"
+                            "name": "splunkAddress",
+                            "value": "[parameters('splunkAddress')]"
                         }
                     ]
                 }
