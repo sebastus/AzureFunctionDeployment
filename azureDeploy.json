@@ -27,6 +27,7 @@
                 "Basic",
                 "Standard",
                 "Premium",
+                "PremiumV2",
                 "Isolated"
             ],
             "defaultValue": "Standard"
@@ -131,11 +132,17 @@
         },
         "outputBinding": {
             "type": "string",
-            "defaultValue": "hec"
+            "defaultValue": "hec",
+            "metadata": {
+                "description": "values are hec, proxy, eventhub"
+            }
         },
         "outputHubConnection": {
             "type": "string",
-            "defaultValue" :""
+            "defaultValue" :"Endpoint=sb://YOURNAMESPACE.servicebus.windows.net/;SharedAccessKeyName=YOURPOLICYNAME;SharedAccessKey=YOURPOLICYKEY",
+            "metadata": {
+                "description": "Only used with outputBinding = eventhub, but must be a valid connection string."
+            }
         },
         "output-hub-name-proxy": {
             "type": "string",
