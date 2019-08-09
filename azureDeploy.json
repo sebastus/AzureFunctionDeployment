@@ -132,6 +132,14 @@
         "outputBinding": {
             "type": "string",
             "defaultValue": "hec"
+        },
+        "outputHubConnection": {
+            "type": "string",
+            "defaultValue" :""
+        },
+        "output-hub-name-proxy": {
+            "type": "string",
+            "defaultValue": "collector-to-proxy"
         }
     },
     "variables": {
@@ -306,6 +314,14 @@
                         {
                             "name": "splunkCertThumbprint",
                             "value": "[parameters('splunkCertThumbprint')]"
+                        },
+                        {
+                            "name": "outputHubConnection",
+                            "value": "[parameters('outputHubConnection')]"
+                        },
+                        {
+                            "name": "output-hub-name-proxy",
+                            "value": "[parameters('output-hub-name-proxy')]"
                         }
                     ]
                 }
